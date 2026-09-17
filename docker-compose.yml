@@ -1,0 +1,37 @@
+﻿name: docker-demo
+
+services:
+  api:  
+    # build:
+    #   context: .
+    #   dockerfile: DockerDemo.API/Dockerfile
+    image: ghcr.io/mesutkizilay/dockerdemoapi:1.0.0
+    container_name: docker-demo-api-prod
+    ports:
+      - "${API_PORT}:8080"
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ASPNETCORE_HTTP_PORTS: 8080
+      ConnectionStrings__DefaultConnection: "Server=${DB_SERVER};Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True;"
+    
+    restart: unless-stopped
+
+    volumes:
+        - ./UserFiles:/app/wwwroot/uploads
+
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+    #   interval: 30s
+    #   timeout: 5s
+    #   retries: 3
+    #   start_period: 10s
+  
+  # testweb:
+  #   image: nginx:alpine
+
+#     volumes:    
+#       - userfiles2:/app/wwwroot/uploads
+
+# volumes:
+#     userfiles2:

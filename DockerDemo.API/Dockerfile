@@ -6,7 +6,6 @@ USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 
-
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
@@ -27,3 +26,17 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "DockerDemo.API.dll"]
+
+
+#FROM base AS final
+#USER root
+#
+#WORKDIR /app
+#COPY --from=publish /app/publish .
+#
+#RUN mkdir -p /app/wwwroot/uploads \
+    #&& chown -R $APP_UID:$APP_UID /app/wwwroot/uploads
+#
+#USER $APP_UID
+#
+#ENTRYPOINT ["dotnet", "DockerDemo.API.dll"]
