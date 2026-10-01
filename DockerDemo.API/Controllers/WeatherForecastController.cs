@@ -8,7 +8,7 @@ namespace DockerDemo.API.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-            "Freezing66"
+            "Freezing55"
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
