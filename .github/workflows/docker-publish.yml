@@ -39,3 +39,16 @@ jobs:
           tags: |
             ghcr.io/mesutkizilay/dockerdemoapi:latest
             ghcr.io/mesutkizilay/dockerdemoapi:sha-${{ github.sha }}
+
+
+  test-local-runner:
+    needs: build-and-push
+    runs-on: [self-hosted, Windows, X64]
+
+    steps:
+      - name: Test self-hosted runner
+        shell: powershell
+        run: |
+          Write-Host "Self-hosted runner calisiyor"
+          hostname
+          whoami
