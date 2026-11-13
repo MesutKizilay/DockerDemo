@@ -41,14 +41,15 @@ jobs:
             ghcr.io/mesutkizilay/dockerdemoapi:sha-${{ github.sha }}
 
 
-  test-local-runner:
+  deploy-local:
     needs: build-and-push
     runs-on: [self-hosted, Windows, X64]
 
     steps:
-      - name: Test self-hosted runner
+      - name: Deploy to local production
         shell: powershell
         run: |
-          Write-Host "Self-hosted runner calisiyor"
-          hostname
-          whoami
+          Set-Location "C:\Deploy\DockerDemo"
+
+          docker compose pull
+          docker compose up -d
