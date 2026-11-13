@@ -5,8 +5,9 @@ services:
     # build:
     #   context: .
     #   dockerfile: DockerDemo.API/Dockerfile
-    image: ghcr.io/mesutkizilay/dockerdemoapi:latest
-    container_name: docker-demo-api-prod2
+    #image: ghcr.io/mesutkizilay/dockerdemoapi:latest
+    image: dockerdemoapi:latest
+    container_name: docker-demo-api-prod
     ports:
       - "${API_PORT}:8080"
 
